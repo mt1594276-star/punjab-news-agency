@@ -1,0 +1,22 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="url(#gradient)"/>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="800" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D97706"/>
+      <stop offset="1" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <g opacity="0.1">
+    <circle cx="400" cy="300" r="200" fill="white"/>
+    <circle cx="600" cy="700" r="150" fill="white"/>
+  </g>
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    PUNJAB
+  </text>
+  <text x="400" y="520" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="white" text-anchor="middle">
+    NEWS
+  </text>
+  <text x="400" y="590" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    AGENCY
+  </text>
+</svg>
