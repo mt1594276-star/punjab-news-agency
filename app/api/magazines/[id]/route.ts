@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 import { magazineStore } from '@/lib/magazineStore';
 
+type RouteContext = {
+  params: { id: string }
+}
+
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
-  const magazine = magazineStore.getById(parseInt(params.id));
+  const { id } = context.params;
+  const magazine = magazineStore.getById(parseInt(id));
   if (!magazine) {
     return NextResponse.json({ error: 'Magazine not found' }, { status: 404 });
   }
@@ -14,11 +19,12 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
   try {
+    const { id } = context.params;
     const body = await request.json();
-    const updated = magazineStore.update(parseInt(params.id), body);
+    const updated = magazineStore.update(parseInt(id), body);
     if (!updated) {
       return NextResponse.json({ error: 'Magazine not found' }, { status: 404 });
     }
@@ -30,9 +36,10 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
-  const deleted = magazineStore.delete(parseInt(params.id));
+  const { id } = context.params;
+  const deleted = magazineStore.delete(parseInt(id));
   if (!deleted) {
     return NextResponse.json({ error: 'Magazine not found' }, { status: 404 });
   }
