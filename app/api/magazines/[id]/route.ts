@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
 import { magazineStore } from '@/lib/magazineStore';
 
-type RouteContext = {
-  params: { id: string }
-}
-
 export async function GET(
   request: Request,
-  context: RouteContext
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = context.params;
+  const { id } = await params;
   const magazine = magazineStore.getById(parseInt(id));
   if (!magazine) {
     return NextResponse.json({ error: 'Magazine not found' }, { status: 404 });
@@ -19,10 +15,10 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  context: RouteContext
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params;
+    const { id } = await params;
     const body = await request.json();
     const updated = magazineStore.update(parseInt(id), body);
     if (!updated) {
@@ -36,12 +32,14 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  context: RouteContext
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = context.params;
+  const { id } = await params;
   const deleted = magazineStore.delete(parseInt(id));
   if (!deleted) {
     return NextResponse.json({ error: 'Magazine not found' }, { status: 404 });
   }
   return NextResponse.json({ success: true });
 }
+
+export const dynamic = 'force-dynamic';
